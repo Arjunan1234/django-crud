@@ -4,10 +4,13 @@ from .models import Student
 
 
 def index(request):
-    return render(request, 'index.html')
+    data = Student.objects.all()
+    context = {"data": data}
+    return render(request, 'index.html', context)
 
 
 def insertData(request):
+
     if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')

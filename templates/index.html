@@ -76,7 +76,38 @@
              
             </form>
           </div>
-          <div class="col-md-8"></div>
+         
+        </div>
+        <div class="col-md-8">
+          <h2 class="text-center text-white bg-dark">Student Details</h2>
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Age</th>
+                <th scope="col">gender</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for d in data %}
+              <tr>
+                <th scope="col">{{d.id}}</th>
+                <td scope="col">{{d.name}}</td>
+                <td scope="col">{{d.email}}</td>
+                <td scope="col">{{d.age}}</td>
+                <td scope="col">{{d.gender}}</td>
+                <td ><button type="button" class="btn btn-primary">Edit</button></td>
+                <td ><button type="button" class="btn btn-danger">Delete</button></td>
+               
+              </tr>
+              {% endfor %}
+             
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
