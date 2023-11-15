@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Student
+from django.contrib import messages
 # Create your views here.
 
 
@@ -19,5 +20,34 @@ def insertData(request):
         print(name, email, age, gender)
         query = Student(name=name, email=email, age=age, gender=gender)
         query.save()
-
+        messages.info(request, "Data Inserted Successfully")
     return render(request, 'index.html')
+
+
+def updateData(request, id):
+
+    if request.method == "POST":
+        name = request.POST['name']
+        email = request.POST['email']
+        age = request.POST['age']
+        gender = request.POST['gender']
+        edit = Student.objects.get(id=id)
+        edit.name = name
+        edit.email = email
+        edit.age = age
+        edit.gender = gender
+        edit.save()
+        messages.warning(request, "Data Update Successfully")
+        return redirect("/")
+
+    d = Student.objects.get(id=id)
+    context = {"d": d}
+    return render(request, 'edit.html', context)
+
+
+def deleteData(request, id):
+
+    d = Student.objects.get(id=id)
+    d.delete()
+    messages.error(request, "Data Deleted Successfully")
+    return redirect("/")
